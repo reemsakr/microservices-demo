@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JpaBuddyIdeaProjectConfig">
+    <option name="defaultUnitInitialized" value="true" />
     <option name="renamerInitialized" value="true" />
+    <option name="reverseEngineeringLastDbConnectionId" value="fa0e6516-e060-4b8c-9610-95446795e322__student_service" />
+    <option name="reLastEntityCreationPackage" value="student-service/src/main/java/gov/iti/jets/studentservice" />
   </component>
 </project>
