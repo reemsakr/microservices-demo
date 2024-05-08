@@ -49,11 +49,8 @@ public class TeacherController {
     public List<StudentDTO> getAllStudents(){
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://localhost:4040/student-service/student";
-
-        // Define a parameterized type reference for the list of StudentDTO
         ParameterizedTypeReference<List<StudentDTO>> responseType = new ParameterizedTypeReference<List<StudentDTO>>() {};
 
-        // Make the HTTP request using exchange() method
         ResponseEntity<List<StudentDTO>> responseEntity = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
@@ -61,7 +58,6 @@ public class TeacherController {
                 responseType
         );
 
-        // Get the list of StudentDTO objects from the response entity
         List<StudentDTO> studentDTOList = responseEntity.getBody();
 
         return studentDTOList;
