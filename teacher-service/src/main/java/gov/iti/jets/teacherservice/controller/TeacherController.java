@@ -1,10 +1,15 @@
 package gov.iti.jets.teacherservice.controller;
 
 
+import gov.iti.jets.teacherservice.dto.StudentDTO;
 import gov.iti.jets.teacherservice.entity.Teacher;
 import gov.iti.jets.teacherservice.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -20,24 +25,46 @@ public class TeacherController {
     }
 
     @GetMapping
-    public List<Teacher> getAllStudents(){
+    public List<Teacher> getAllTeachers(){
         return  TeacherRepository.findAll();
     }
 
     @PostMapping
-    public void addStudent(@RequestBody Teacher teacher){
+    public void addTeacher(@RequestBody Teacher teacher){
         TeacherRepository.insert(teacher);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteStudent( @PathVariable String id){
+    public void deleteTeacher( @PathVariable String id){
         TeacherRepository.deleteById(id);
     }
 
     @PutMapping
-    public void updateStudent(@RequestBody Teacher student){
+    public void updateTeacher(@RequestBody Teacher student){
         TeacherRepository.save(student);
     }
 
 
+    @GetMapping("/{students}")
+    public List<StudentDTO> getAllStudents(){
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "http://localhost:4040/student-service/student";
+
+        // Define a parameterized type reference for the list of StudentDTO
+        ParameterizedTypeReference<List<StudentDTO>> responseType = new ParameterizedTypeReference<List<StudentDTO>>() {};
+
+        // Make the HTTP request using exchange() method
+        ResponseEntity<List<StudentDTO>> responseEntity = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                responseType
+        );
+
+        // Get the list of StudentDTO objects from the response entity
+        List<StudentDTO> studentDTOList = responseEntity.getBody();
+
+        return studentDTOList;
+
+    }
 }
