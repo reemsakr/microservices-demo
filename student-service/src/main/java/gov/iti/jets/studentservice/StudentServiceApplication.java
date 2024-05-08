@@ -24,13 +24,13 @@ public class StudentServiceApplication {
         return runner -> {
 
 
-            Student student = new Student();
-            student.setName("reem");
-            student.setCourses(new ArrayList<>());
-            studentRepository.save(student);
-            System.out.println(studentController.getAllStudents());
-
-            System.out.println(studentRepository.findAll());
+//            Student student = new Student();
+//            student.setName("reem");
+//            student.setCourses(new ArrayList<>());
+//            studentRepository.save(student);
+//            System.out.println(studentController.getAllStudents());
+//
+//            System.out.println(studentRepository.findAll());
         };
 
     }

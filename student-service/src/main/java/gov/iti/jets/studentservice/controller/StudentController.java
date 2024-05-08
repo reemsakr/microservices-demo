@@ -1,5 +1,6 @@
 package gov.iti.jets.studentservice.controller;
 
+import gov.iti.jets.studentservice.dto.StudentDTO;
 import gov.iti.jets.studentservice.entity.Student;
 import gov.iti.jets.studentservice.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,14 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<Student> getAllStudents(){
-        return  studentRepository.findAll();
+    public List<StudentDTO> getAllStudents(){
+        return  studentRepository.findAllStudents();
     }
 
+    @GetMapping("/{id}")
+    public StudentDTO getById(@PathVariable String id){
+        return studentRepository.getStudentsById(id);
+    }
     @PostMapping
     public void addStudent(@RequestBody Student student){
         studentRepository.insert(student);
