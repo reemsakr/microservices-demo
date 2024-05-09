@@ -1,12 +1,15 @@
 package gov.iti.jets.studentservice.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class StudentDTO implements Serializable {
     String id;
     String name;

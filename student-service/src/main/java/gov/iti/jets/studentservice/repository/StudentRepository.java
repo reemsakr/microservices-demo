@@ -10,9 +10,8 @@ import java.util.List;
 
 @Repository
 public interface StudentRepository extends MongoRepository<Student,String> {
-    StudentDTO getStudentsById(String id);
-    @Query(value="{}", fields="{id : 1, name : 1}") // Query to select all documents
-    List<StudentDTO> findAllStudents();
+    Student getStudentsById(String id);
+
 
 
 
