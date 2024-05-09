@@ -1,4 +1,4 @@
-package gov.iti.jets.teacherservice.dto;
+package gov.iti.jets.teacherservice.remote;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class StudentDTO implements Serializable {
+public class Student implements Serializable {
     String id;
     String name;
     String email;

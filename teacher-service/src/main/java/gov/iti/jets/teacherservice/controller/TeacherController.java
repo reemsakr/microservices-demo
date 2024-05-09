@@ -1,9 +1,12 @@
 package gov.iti.jets.teacherservice.controller;
 
 
-import gov.iti.jets.teacherservice.dto.StudentDTO;
+import gov.iti.jets.teacherservice.dto.TeacherDTO;
+import gov.iti.jets.teacherservice.mapper.TeacherMapper;
+import gov.iti.jets.teacherservice.remote.Student;
 import gov.iti.jets.teacherservice.entity.Teacher;
 import gov.iti.jets.teacherservice.repository.TeacherRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -11,22 +14,37 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/teacher")
+@RequiredArgsConstructor
 public class TeacherController {
 
-    TeacherRepository TeacherRepository;
 
-    @Autowired
-    public TeacherController(TeacherRepository TeacherRepository){
-        this.TeacherRepository = TeacherRepository ;
-    }
+
+   final TeacherRepository TeacherRepository;
+
+  final  TeacherMapper teacherMapper;
+ //   @Autowired
+//    public TeacherController(TeacherRepository TeacherRepository, TeacherMapper teacherMapper){
+//        this.TeacherRepository = TeacherRepository ;
+//        this.teacherMapper = teacherMapper;
+//    }
 
     @GetMapping
-    public List<Teacher> getAllTeachers(){
-        return  TeacherRepository.findAll();
+    public List<TeacherDTO> getAllTeachers(){
+        List<Teacher> teachers = TeacherRepository.findAll();
+        List<TeacherDTO> teacherDTOList = new ArrayList<>();
+        for(Teacher teacher:teachers){
+
+            System.out.println(teacher.getName() + " "+teacherMapper.teacherToTeacherDTO(teacher).getName());
+            teacherDTOList.add(teacherMapper.teacherToTeacherDTO(teacher));
+
+        }
+
+        return  teacherDTOList;
     }
 
     @PostMapping
@@ -46,19 +64,19 @@ public class TeacherController {
 
 
     @GetMapping("/{students}")
-    public List<StudentDTO> getAllStudents(){
+    public List<Student> getAllStudents(){
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://localhost:4040/student-service/student";
-        ParameterizedTypeReference<List<StudentDTO>> responseType = new ParameterizedTypeReference<List<StudentDTO>>() {};
+        ParameterizedTypeReference<List<Student>> responseType = new ParameterizedTypeReference<List<Student>>() {};
 
-        ResponseEntity<List<StudentDTO>> responseEntity = restTemplate.exchange(
+        ResponseEntity<List<Student>> responseEntity = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 null,
                 responseType
         );
 
-        List<StudentDTO> studentDTOList = responseEntity.getBody();
+        List<Student> studentDTOList = responseEntity.getBody();
 
         return studentDTOList;
 
