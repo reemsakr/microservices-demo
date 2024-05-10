@@ -32,26 +32,27 @@ public class TeacherController {
 
    final TeacherRepository TeacherRepository;
 
-  //final  TeacherMapper teacherMapper;
+  final  TeacherMapper teacherMapper;
+
  //   @Autowired
 //    public TeacherController(TeacherRepository TeacherRepository, TeacherMapper teacherMapper){
 //        this.TeacherRepository = TeacherRepository ;
 //        this.teacherMapper = teacherMapper;
 //    }
 
-//    @GetMapping
-//    public List<TeacherDTO> getAllTeachers(){
-//        List<Teacher> teachers = TeacherRepository.findAll();
-//        List<TeacherDTO> teacherDTOList = new ArrayList<>();
-//        for(Teacher teacher:teachers){
-//
-//            System.out.println(teacher.getName() + " "+teacherMapper.teacherToTeacherDTO(teacher).getName());
-//            teacherDTOList.add(teacherMapper.teacherToTeacherDTO(teacher));
-//
-//        }
-//
-//        return  teacherDTOList;
-//    }
+    @GetMapping
+    public List<TeacherDTO> getAllTeachers(){
+        List<Teacher> teachers = TeacherRepository.findAll();
+        List<TeacherDTO> teacherDTOList = new ArrayList<>();
+        for(Teacher teacher:teachers){
+
+            System.out.println(teacher.getName() + " "+ teacherMapper.teacherToTeacherDTO(teacher).getName());
+            teacherDTOList.add(teacherMapper.teacherToTeacherDTO(teacher));
+
+        }
+
+        return  teacherDTOList;
+    }
 
     @PostMapping
     public void addTeacher(@RequestBody Teacher teacher){

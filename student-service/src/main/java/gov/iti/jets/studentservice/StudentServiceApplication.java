@@ -25,7 +25,7 @@ public class StudentServiceApplication {
 
         return runner -> {
 
-
+//
 //            Student student = new Student();
 //            student.setName("reem");
 //            student.setCourses(new ArrayList<>());

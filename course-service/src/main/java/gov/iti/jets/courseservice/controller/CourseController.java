@@ -24,22 +24,22 @@ public class CourseController {
     }
 
     @GetMapping
-    public List<Course> getAllStudents(){
+    public List<Course> getAllCourses(){
         return  courseRepository.findAll();
     }
 
     @PostMapping
-    public void addStudent(@RequestBody Course course){
+    public void addCourse(@RequestBody Course course){
         courseRepository.insert(course);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteStudent( @PathVariable String id){
+    public void deleteCourse( @PathVariable String id){
         courseRepository.deleteById(id);
     }
 
     @PutMapping
-    public void updateStudent(@RequestBody Course course){
+    public void updateCourse(@RequestBody Course course){
         courseRepository.save(course);
     }
 
